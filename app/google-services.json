@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "557725459718",
+    "project_id": "exam-wiz",
+    "storage_bucket": "exam-wiz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557725459718:android:0ab5ac00259e0394b32a87",
+        "android_client_info": {
+          "package_name": "examwiz.ibankang.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiDoqe94S5ffzbDmNpjG2fLXvSWFGOau8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

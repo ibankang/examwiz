@@ -56,6 +56,7 @@ public class signup_activity extends AppCompatActivity {
     void createAccount(){
         String email  = emailEditText.getText().toString();
         String password  = passwordEditText.getText().toString();
+
         String confirmPassword  = confirmPasswordEditText.getText().toString();
 
         boolean isValidated = validateData(email,password,confirmPassword);

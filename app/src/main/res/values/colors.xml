@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#76ABDF</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="primary">#76ABDF</color>
+    <color name="primary_dark">#4D7B9D</color>
+    <color name="primary_light">#A4C1E9</color>
+
+    <color name="nav_header_dark">#FF1F355F</color>
+    <color name="blue1">#8aceff</color>
+    <color name="blue2">#45A3E4</color>
+    <color name="blue3">#0571d3</color>
+    <color name="blue4">#0034bb</color>
+    <color name="blue5">#031d8c</color>
+    <color name="blue6">#01184e</color>
+
     <color name="my_blue">#76abdf</color>
     <color name="bottom_nav_color">#f0f0f0</color>
     <color name="lavender">#FF8692f7</color>

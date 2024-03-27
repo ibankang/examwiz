@@ -43,6 +43,7 @@
                 style="@style/MyTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/email_edit_txt"
                 android:hint="Email ID">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -56,6 +57,7 @@
                 style="@style/MyTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/password_edit_txt"
                 android:layout_marginTop="10dp"
                 android:hint="Password"
                 app:endIconMode="password_toggle">
@@ -95,12 +97,12 @@
         </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/create_account_btn"
+                android:id="@+id/login_btn"
                 android:layout_width="250dp"
                 android:layout_height="64dp"
                 android:layout_marginTop="25dp"
                 android:layout_gravity="center"
-                android:text="Create Account"
+                android:text="Login"
                 android:backgroundTint="@color/primary"
                 android:textSize="16sp" />
 

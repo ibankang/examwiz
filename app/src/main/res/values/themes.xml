@@ -4,6 +4,12 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimaryDark">@color/primary</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary</item>
+
+        <item name="android:textSize">16dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHint">@color/black_light</item>
     </style>
 
     <style name="MyTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
@@ -25,4 +31,10 @@
     </style>
 
     <style name="Theme.ExamWiz" parent="Base.Theme.ExamWiz" />
+
+    <style name="round_img_view">
+        <item name="cornerFamily">rounded</item>
+        <item name="backgroundColor">@color/black</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

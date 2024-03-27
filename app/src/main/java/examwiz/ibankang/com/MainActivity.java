@@ -131,6 +131,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = drawerLayout.findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
 
+        ((ImageView)findViewById(R.id.user_photo_img)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, profile_activity.class));
+            }
+        });
+
         // Get Firebase user
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {

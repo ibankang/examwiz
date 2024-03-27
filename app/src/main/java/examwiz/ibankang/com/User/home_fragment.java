@@ -1,4 +1,4 @@
-package examwiz.ibankang.com;
+package examwiz.ibankang.com.User;
 
 import android.os.Bundle;
 
@@ -9,15 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.constants.ScaleTypes;
-import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.util.ArrayList;
-import java.util.List;
+import examwiz.ibankang.com.R;
 
 /**
  * A simple {@link Fragment} subclass.

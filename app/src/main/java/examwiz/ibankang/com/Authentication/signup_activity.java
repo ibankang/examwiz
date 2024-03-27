@@ -223,6 +223,7 @@ public class signup_activity extends AppCompatActivity {
             Map<String, Object> mapdata = new HashMap<>();
             mapdata.put("guid", guid);
             mapdata.put("authority", authority);
+            mapdata.put("account_type", "");
             mapdata.put("name", name_textinput.getEditText().getText().toString());
             mapdata.put("roll_no", roll_textinput.getEditText().getText().toString());
             mapdata.put("teacher_id", teacher_id_textinput.getEditText().getText().toString());

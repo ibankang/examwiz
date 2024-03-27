@@ -29,6 +29,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import examwiz.ibankang.com.Authentication.login_activity;
 import examwiz.ibankang.com.Authentication.splash_screen_activity;
+import examwiz.ibankang.com.User.calander_fragment;
+import examwiz.ibankang.com.User.home_fragment;
+import examwiz.ibankang.com.User.search_fragment;
+import examwiz.ibankang.com.adminUi.AdminCalendarFragment;
+import examwiz.ibankang.com.adminUi.AdminHomeFragment;
+import examwiz.ibankang.com.adminUi.AdminSearchFragment;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
@@ -41,17 +47,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        replaceFragment(new home_fragment());
+        replaceFragment(new AdminHomeFragment());
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.home) {
-                    replaceFragment(new home_fragment());
+                    replaceFragment(new AdminHomeFragment());
                 } else if (item.getItemId() == R.id.search) {
-                    replaceFragment(new search_fragment());
+                    replaceFragment(new AdminSearchFragment());
                 } else if (item.getItemId() == R.id.calander) {
-                    replaceFragment(new calander_fragment());
+                    replaceFragment(new AdminCalendarFragment());
                 }
                 return true;
             }
@@ -78,10 +84,12 @@ public class MainActivity extends AppCompatActivity {
                             if (id == R.id.nav_home) {
                                 startActivity(new Intent(MainActivity.this, splash_screen_activity.class));
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                            } else if (id == R.id.nav_admin) {
-                                startActivity(new Intent(MainActivity.this, splash_screen_activity.class));
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                            } else if (id == R.id.nav_logout) {
+                            }
+//                            else if (id == R.id.nav_admin) {
+//                                startActivity(new Intent(MainActivity.this, splash_screen_activity.class));
+//                                drawerLayout.closeDrawer(GravityCompat.START);
+//                            }
+                            else if (id == R.id.nav_logout) {
                                 logoutUser();
                                 drawerLayout.closeDrawer(GravityCompat.START);
                             }

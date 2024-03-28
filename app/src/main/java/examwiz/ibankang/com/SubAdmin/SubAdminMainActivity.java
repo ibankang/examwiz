@@ -35,9 +35,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import examwiz.ibankang.com.Authentication.login_activity;
 import examwiz.ibankang.com.Authentication.splash_screen_activity;
 import examwiz.ibankang.com.R;
-import examwiz.ibankang.com.admin.AdminCalendarFragment;
-import examwiz.ibankang.com.admin.AdminHomeFragment;
-import examwiz.ibankang.com.admin.AdminSearchFragment;
+import examwiz.ibankang.com.adminUi.AdminCalendarFragment;
+import examwiz.ibankang.com.adminUi.AdminHomeFragment;
+import examwiz.ibankang.com.adminUi.AdminSearchFragment;
 import examwiz.ibankang.com.profile_activity;
 
 public class SubAdminMainActivity extends AppCompatActivity {

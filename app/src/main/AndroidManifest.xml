@@ -16,7 +16,7 @@
         android:theme="@style/Theme.ExamWiz"
         tools:targetApi="31">
         <activity
-            android:name=".admin.subadmin_activity"
+            android:name=".adminUi.subadmin_activity"
             android:exported="false" />
         <activity
             android:name=".SubAdmin.SubAdminMainActivity"

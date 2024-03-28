@@ -10,6 +10,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +53,21 @@ public class AdminHomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adminAdapter);
 
+        ImageSlider imageSlider = binding.imageSlider;
+        ArrayList<SlideModel> slideModels = new ArrayList<>();
+
+        slideModels.add(new SlideModel(R.drawable.wallpaper1, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper2, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper3, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper4, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper5, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper6, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper7, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper8, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper9, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper10, ScaleTypes.FIT));
+
+        imageSlider.setImageList(slideModels, ScaleTypes.FIT);
 
         return binding.getRoot();
     }

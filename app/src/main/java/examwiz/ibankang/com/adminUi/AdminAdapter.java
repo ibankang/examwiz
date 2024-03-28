@@ -24,7 +24,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.AdminViewHol
     public AdminAdapter(Context context, List<ExamDetails> examItemClassList) {
         this.context = context;
         this.examItemClassList = examItemClassList;
-        colors = new int[]{R.color.hot_red, R.color.hot_blue, R.color.hot_green, R.color.hot_indigo, R.color.hot_red, R.color.hot_blue, R.color.hot_green, R.color.hot_indigo};
+        colors = new int[]{R.color.hot_red, R.color.hot_indigo, R.color.hot_green, R.color.hot_blue, R.color.hot_red, R.color.hot_indigo, R.color.hot_green, R.color.hot_blue};
     }
 
     @NonNull

@@ -1,4 +1,4 @@
-package examwiz.ibankang.com.adminUi;
+package examwiz.ibankang.com.admin;
 
 public class ExamDetails {
     private String examName;

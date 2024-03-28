@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,15 +30,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import examwiz.ibankang.com.Authentication.login_activity;
 import examwiz.ibankang.com.Authentication.splash_screen_activity;
-import examwiz.ibankang.com.User.calander_fragment;
-import examwiz.ibankang.com.User.home_fragment;
-import examwiz.ibankang.com.User.search_fragment;
-import examwiz.ibankang.com.adminUi.AdminCalendarFragment;
-import examwiz.ibankang.com.adminUi.AdminHomeFragment;
-import examwiz.ibankang.com.adminUi.AdminSearchFragment;
+import examwiz.ibankang.com.admin.AdminCalendarFragment;
+import examwiz.ibankang.com.admin.AdminHomeFragment;
+import examwiz.ibankang.com.admin.AdminSearchFragment;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
+    String account_type = "user", username, email;
     DrawerLayout drawerLayout;
     BottomNavigationView bottomNavigationView;
 
@@ -63,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         drawerLayout = findViewById(R.id.drawer_layout);
         ImageView menu_btn = (ImageView) findViewById(R.id.menu_btn);
         menu_btn.setOnClickListener(new View.OnClickListener() {
@@ -73,9 +71,28 @@ public class MainActivity extends AppCompatActivity {
                     drawerLayout.closeDrawer(GravityCompat.START);
                 } else {
                     //
-                    setUserInfoInDrawer();
-                    drawerLayout.openDrawer(GravityCompat.START);
                     NavigationView navigationView = drawerLayout.findViewById(R.id.nav_view);
+                    View headerView = navigationView.getHeaderView(0);
+
+                    ((ImageView)findViewById(R.id.user_photo_img)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(MainActivity.this, profile_activity.class));
+                        }
+                    });
+                            TextView usernameTextView = headerView.findViewById(R.id.user_name_txt);
+                            TextView emailTextView = headerView.findViewById(R.id.user_email_id_txt);
+                            usernameTextView.setText(username);
+                            emailTextView.setText(email);
+
+                    // Open drawer
+
+                    drawerLayout.openDrawer(GravityCompat.START);
+//                    NavigationView navigationView = drawerLayout.findViewById(R.id.nav_view);
+                    if (account_type.equals("admin")){
+                        navigationView.getMenu().findItem(R.id.nav_subamin).setVisible(true);
+                    }
+                    Toast.makeText(MainActivity.this, account_type, Toast.LENGTH_SHORT).show();
                     navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                         @Override
                         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -85,22 +102,26 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(new Intent(MainActivity.this, splash_screen_activity.class));
                                 drawerLayout.closeDrawer(GravityCompat.START);
                             }
-//                            else if (id == R.id.nav_admin) {
-//                                startActivity(new Intent(MainActivity.this, splash_screen_activity.class));
-//                                drawerLayout.closeDrawer(GravityCompat.START);
-//                            }
+                            else if (id == R.id.nav_subamin) {
+
+                                startActivity(new Intent(MainActivity.this, splash_screen_activity.class));
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                            }
                             else if (id == R.id.nav_logout) {
                                 logoutUser();
                                 drawerLayout.closeDrawer(GravityCompat.START);
                             }
                             return false;
                         }
+
+
                     });
                 }
 
             }
         });
 
+        setUserInfoInDrawer();
     }
 
     private void replaceFragment(Fragment fragment) {
@@ -128,15 +149,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUserInfoInDrawer() {
-        NavigationView navigationView = drawerLayout.findViewById(R.id.nav_view);
-        View headerView = navigationView.getHeaderView(0);
 
-        ((ImageView)findViewById(R.id.user_photo_img)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, profile_activity.class));
-            }
-        });
 
         // Get Firebase user
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -156,17 +169,12 @@ public class MainActivity extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             // Retrieve user data
-                            String username = document.getString("name");
-                            String email = document.getString("email");
+                            username = document.getString("name");
+                            email = document.getString("email");
+                            account_type = document.getString("account_type");
 
                             // Set user data in drawer header
-                            TextView usernameTextView = headerView.findViewById(R.id.user_name_txt);
-                            TextView emailTextView = headerView.findViewById(R.id.user_email_id_txt);
-                            usernameTextView.setText(username);
-                            emailTextView.setText(email);
 
-                            // Open drawer
-                            drawerLayout.openDrawer(GravityCompat.START);
                         }
                     } else {
                         Log.d("MainActivity", "Document retrieval failed:", task.getException());

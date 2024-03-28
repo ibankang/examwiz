@@ -40,6 +40,7 @@ import examwiz.ibankang.com.Utils;
 public class signup_activity extends AppCompatActivity {
 
     String guid = null;
+    public static final String Guid_KEY = "guid";
     TextInputLayout emailEditText, passwordEditText, confirmPasswordEditText, name_textinput, roll_textinput, teacher_id_textinput, reg_textinput, phone_textinput, uni_name_textinput, dept_name_textinput, designation_textinput, passout_textinput;
     Button createAccountBtn;
     ProgressBar progressBar;
@@ -224,6 +225,7 @@ public class signup_activity extends AppCompatActivity {
             mapdata.put("guid", guid);
             mapdata.put("authority", authority);
             mapdata.put("account_type", "");
+            mapdata.put("photo", "");
             mapdata.put("name", name_textinput.getEditText().getText().toString());
             mapdata.put("roll_no", roll_textinput.getEditText().getText().toString());
             mapdata.put("teacher_id", teacher_id_textinput.getEditText().getText().toString());

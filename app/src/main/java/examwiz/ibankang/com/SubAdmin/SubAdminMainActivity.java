@@ -20,7 +20,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,16 +32,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import examwiz.ibankang.com.Authentication.login_activity;
 import examwiz.ibankang.com.Authentication.splash_screen_activity;
-import examwiz.ibankang.com.MainActivity;
 import examwiz.ibankang.com.R;
-import examwiz.ibankang.com.adminUi.AdminCalendarFragment;
-import examwiz.ibankang.com.adminUi.AdminHomeFragment;
-import examwiz.ibankang.com.adminUi.AdminSearchFragment;
+import examwiz.ibankang.com.admin.AdminCalendarFragment;
+import examwiz.ibankang.com.admin.AdminHomeFragment;
+import examwiz.ibankang.com.admin.AdminSearchFragment;
 import examwiz.ibankang.com.profile_activity;
 
 public class SubAdminMainActivity extends AppCompatActivity {

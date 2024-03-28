@@ -54,19 +54,37 @@
                         app:tint="@color/white" />
                 </LinearLayout>
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@drawable/professor"
-                    android:layout_gravity="center"
-                    app:shapeAppearanceOverlay="@style/round_img"
-                    app:strokeWidth="5dp"
-                    app:strokeColor="@color/white"
-                    android:padding="5dp"
-                    android:id="@+id/user_photo_img"
-                    android:scaleType="fitCenter"
-                    android:layout_margin="10dp"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profileImage"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_centerInParent="true"
+                        android:clickable="true"
+                        android:onClick="onEditIconClicked"
+                        android:padding="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/professor"
+                        app:shapeAppearanceOverlay="@style/round_img"
+                        app:strokeColor="@color/white"
+                        app:strokeWidth="5dp" />
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:id="@+id/edit_prifile_img"-->
+<!--                        android:layout_alignEnd="@id/profileImage"-->
+<!--                        android:layout_alignBottom="@id/profileImage"-->
+<!--                        android:src="@drawable/outline_edit_24"-->
+<!--                        android:padding="8dp"-->
+<!--                        android:background="@drawable/circular_bg"-->
+<!--                        android:layout_marginBottom="10dp"/>-->
+
+
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="match_parent"

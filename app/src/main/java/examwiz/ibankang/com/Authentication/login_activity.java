@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class login_activity extends AppCompatActivity {
 
+    String guid = null;
+    public static final String Guid_KEY = "guid";
     TextInputLayout emailEditText,passwordEditText;
     Button loginBtn;
     ProgressBar progressBar;

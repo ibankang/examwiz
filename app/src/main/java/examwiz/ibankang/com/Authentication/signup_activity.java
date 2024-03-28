@@ -226,6 +226,7 @@ public class signup_activity extends AppCompatActivity {
             mapdata.put("authority", authority);
             mapdata.put("account_type", "");
             mapdata.put("photo", "");
+            mapdata.put("status", "");
             mapdata.put("name", name_textinput.getEditText().getText().toString());
             mapdata.put("roll_no", roll_textinput.getEditText().getText().toString());
             mapdata.put("teacher_id", teacher_id_textinput.getEditText().getText().toString());

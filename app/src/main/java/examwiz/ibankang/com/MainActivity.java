@@ -30,9 +30,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import examwiz.ibankang.com.Authentication.login_activity;
 import examwiz.ibankang.com.Authentication.splash_screen_activity;
+import examwiz.ibankang.com.SubAdmin.subadmin_exam_activity;
 import examwiz.ibankang.com.adminUi.AdminCalendarFragment;
 import examwiz.ibankang.com.adminUi.AdminHomeFragment;
 import examwiz.ibankang.com.adminUi.AdminSearchFragment;
+import examwiz.ibankang.com.adminUi.subadmin_activity;
 
 public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
@@ -92,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
                     if (account_type.equals("admin")){
                         navigationView.getMenu().findItem(R.id.nav_subamin).setVisible(true);
                     }
+
+                    if (account_type.equals("subadmin")){
+                        navigationView.getMenu().findItem(R.id.nav_subamin_exam).setVisible(true);
+                    }
+
                     Toast.makeText(MainActivity.this, account_type, Toast.LENGTH_SHORT).show();
                     navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                         @Override
@@ -104,9 +111,16 @@ public class MainActivity extends AppCompatActivity {
                             }
                             else if (id == R.id.nav_subamin) {
 
-                                startActivity(new Intent(MainActivity.this, splash_screen_activity.class));
+                                startActivity(new Intent(MainActivity.this, subadmin_activity.class));
                                 drawerLayout.closeDrawer(GravityCompat.START);
                             }
+
+                            else if (id == R.id.nav_subamin_exam) {
+
+                                startActivity(new Intent(MainActivity.this, subadmin_exam_activity.class));
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                            }
+
                             else if (id == R.id.nav_logout) {
                                 logoutUser();
                                 drawerLayout.closeDrawer(GravityCompat.START);

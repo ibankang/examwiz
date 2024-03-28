@@ -59,15 +59,20 @@
                     android:layout_height="150dp"
                     android:src="@drawable/professor"
                     android:layout_gravity="center"
-                    app:shapeAppearanceOverlay="@style/round_img_view"
+                    app:shapeAppearanceOverlay="@style/round_img"
+                    app:strokeWidth="5dp"
+                    app:strokeColor="@color/white"
+                    android:padding="5dp"
                     android:id="@+id/user_photo_img"
                     android:scaleType="fitCenter"
                     android:layout_margin="10dp"/>
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="User Name"
+                    android:id="@+id/username_txt"
                     android:layout_gravity="center"
                     android:textColor="@color/white"
                     android:textStyle="bold"
@@ -78,6 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="University Name"
+                    android:id="@+id/uni_name_txt"
                     android:layout_gravity="center"
                     android:textColor="@color/white"
                     android:textStyle="bold"
@@ -94,9 +100,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="12101115"
+                        android:text="00000000"
+                        android:id="@+id/roll_txt"
                         android:textColor="@color/white"
-                        android:textSize="25sp"
+                        android:textSize="20sp"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:background="@drawable/right_border"/>
@@ -105,9 +112,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="7141-2021-515"
+                        android:text="00000000000"
+                        android:id="@+id/reg_txt"
                         android:textColor="@color/white"
-                        android:textSize="25sp"
+                        android:textSize="20sp"
                         android:layout_gravity="center"
                         android:gravity="center"/>
                 </LinearLayout>
@@ -144,6 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="example@gmail.com"
+                    android:id="@+id/user_email"
                     android:textSize="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_gravity="center"/>
@@ -174,6 +183,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="XX 0000000000"
+                    android:id="@+id/user_phone"
                     android:textSize="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_gravity="center"/>
@@ -204,108 +214,99 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="User"
+                    android:id="@+id/account_type"
                     android:textSize="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_gravity="center"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/top_border"
+                    android:paddingTop="10dp"
+                    android:layout_marginTop="25dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/outline_category_24"
+                        app:tint="@color/primary" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Department"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dept Name"
+                    android:id="@+id/dept_name_txt"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_gravity="center"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/top_border"
+                    android:paddingTop="10dp"
+                    android:layout_marginTop="25dp">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/outline_calendar_month_24"
+                        app:tint="@color/primary" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Passout Year"
+                        android:layout_marginLeft="5dp"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="YYYY"
+                    android:id="@+id/passout_txt"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="70dp"/>
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/outline_email_24"
-                        app:tint="@color/primary" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Email ID"
-                        android:layout_marginLeft="5dp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="example@gmail.com"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_gravity="center"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/top_border"
-                    android:paddingTop="10dp"
-                    android:layout_marginTop="25dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/outline_local_phone_24"
-                        app:tint="@color/primary" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Mobile"
-                        android:layout_marginLeft="5dp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
+                    android:text="Version 1.0.0"
+                    android:gravity="center|bottom"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_700"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="XX 0000000000"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_gravity="center"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/top_border"
-                    android:paddingTop="10dp"
-                    android:layout_marginTop="25dp">
-
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/outline_manage_accounts_24"
-                        app:tint="@color/primary" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Account Type"
-                        android:layout_marginLeft="5dp"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="User"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_gravity="center"/>
-
+                    android:text="Made in India"
+                    android:gravity="center|bottom"
+                    android:textSize="14sp"
+                    android:textColor="@color/grey_700"/>
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

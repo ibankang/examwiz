@@ -33,8 +33,6 @@
     <style name="Theme.ExamWiz" parent="Base.Theme.ExamWiz" />
 
     <style name="round_img_view">
-        <item name="cornerFamily">rounded</item>
-        <item name="backgroundColor">@color/black</item>
         <item name="cornerSize">50%</item>
     </style>
 </resources>

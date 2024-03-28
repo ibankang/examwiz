@@ -212,50 +212,50 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/MyTextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/city_name_textinput"
-                android:layout_marginTop="10dp"
-                android:hint="City Name">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                style="@style/MyTextInputLayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/city_name_textinput"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:hint="City Name">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"/>
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:inputType="text"/>-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/MyTextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/state_textinput"
-                android:layout_marginTop="10dp"
-                android:hint="State Name">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                style="@style/MyTextInputLayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/state_textinput"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:hint="State Name">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"/>
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:inputType="text"/>-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/MyTextInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/country_textinput"
-                android:layout_marginTop="10dp"
-                android:hint="Country Name">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                style="@style/MyTextInputLayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/country_textinput"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:hint="Country Name">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"/>
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:inputType="text"/>-->
 
-            </com.google.android.material.textfield.TextInputLayout>
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/MyTextInputLayout"

@@ -2,21 +2,31 @@ package examwiz.ibankang.com.SubAdmin;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import examwiz.ibankang.com.R;
+import examwiz.ibankang.com.adminUi.subadmin_activity;
 import examwiz.ibankang.com.view_model;
 
 public class subadmin_details_adapter extends RecyclerView.Adapter<subadmin_details_adapter.viewholder> {
@@ -39,7 +49,9 @@ public class subadmin_details_adapter extends RecyclerView.Adapter<subadmin_deta
     public void onBindViewHolder(@NonNull subadmin_details_adapter.viewholder holder, int position) {
         final view_model temp = dataholder.get(position);
         holder.subadmin_name_txt.setText(temp.getText2());
-        Picasso.get().load(temp.getText1()).into(holder.subadmin_profile_img);
+        if (temp.getText1().length()>20) {
+            Picasso.get().load(temp.getText1()).into(holder.subadmin_profile_img);
+        }
         holder.subadmin_email_txt.setText(temp.getText3());
 //        holder.subadmin_create_date.setText(temp.getText4());
 
@@ -54,6 +66,34 @@ public class subadmin_details_adapter extends RecyclerView.Adapter<subadmin_deta
 //
 //            }
 //        });
+
+        holder.more_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Map<String, Object> mapdata = new HashMap<>();
+                mapdata.put("account_type", "user");
+                mapdata.put("admin_uid", "null");
+                mapdata.put("subaccount_time", FieldValue.serverTimestamp());
+
+                CollectionReference accountRef = FirebaseFirestore.getInstance().collection("account");
+                accountRef.document(temp.getText10()).update(mapdata)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(context, "Subadmin removed successfully", Toast.LENGTH_SHORT).show();
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            dataholder.remove(position);
+                                            notifyItemRemoved(position);
+                                        }
+                                    }, 1000);
+                                }
+                            }
+                        });
+            }
+        });
     }
 
     @Override

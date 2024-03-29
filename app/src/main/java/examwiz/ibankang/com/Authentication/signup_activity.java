@@ -224,9 +224,11 @@ public class signup_activity extends AppCompatActivity {
             Map<String, Object> mapdata = new HashMap<>();
             mapdata.put("guid", guid);
             mapdata.put("authority", authority);
-            mapdata.put("account_type", "");
-            mapdata.put("photo", "");
-            mapdata.put("status", "");
+            mapdata.put("account_type", "user");
+            mapdata.put("admin_uid","null");
+            mapdata.put("subaccount_time", FieldValue.serverTimestamp());
+            mapdata.put("photo", "null");
+            mapdata.put("status", true);
             mapdata.put("name", name_textinput.getEditText().getText().toString());
             mapdata.put("roll_no", roll_textinput.getEditText().getText().toString());
             mapdata.put("teacher_id", teacher_id_textinput.getEditText().getText().toString());
@@ -240,6 +242,7 @@ public class signup_activity extends AppCompatActivity {
 //            mapdata.put("state", state_textinput.getEditText().getText().toString());
 //            mapdata.put("country", country_textinput.getEditText().getText().toString());
             mapdata.put("email", emailEditText.getEditText().getText().toString());
+            mapdata.put("date_time", FieldValue.serverTimestamp());
 
             FirebaseFirestore.getInstance().collection("account").document(guid).set(mapdata).addOnCompleteListener(task -> {
                 Toast.makeText(signup_activity.this, "Successfully create account,Check email to verify", Toast.LENGTH_SHORT).show();

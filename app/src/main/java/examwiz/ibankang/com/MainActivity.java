@@ -14,7 +14,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +52,23 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         replaceFragment(new AdminHomeFragment());
+
+
+        // Get reference to the spinner
+        Spinner spinner = findViewById(R.id.year_spinner);
+
+        // Define an array of options
+        String[] years = {"1st Year", "2nd Year", "3rd Year", "4th Year"};
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, years);
+
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -135,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         setUserInfoInDrawer();
     }
 
@@ -189,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
                             // Set user data in drawer header
 
+                            updateUIWithUserData();
                         }
                     } else {
                         Log.d("MainActivity", "Document retrieval failed:", task.getException());
@@ -196,5 +218,28 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void updateUIWithUserData() {
+        // Update account type UI
+        TextView account_type_txt = findViewById(R.id.account_type_txt);
+        LinearLayout year_dropdown_layout = findViewById(R.id.year_layout);
+        LinearLayout account_type_layout = findViewById(R.id.account_type_layout);
+
+        if (account_type.equals("admin")) {
+            account_type_txt.setText("Admin");
+            year_dropdown_layout.setVisibility(View.GONE);
+        } else if (account_type.equals("subadmin")) {
+            account_type_txt.setText("Subadmin");
+            year_dropdown_layout.setVisibility(View.GONE);
+        } else if (account_type.equals("user")) {
+            account_type_layout.setVisibility(View.GONE);
+            year_dropdown_layout.setVisibility(View.VISIBLE);
+        } else {
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+        }
+
+        // Show the correct account type in Toast
+        Toast.makeText(MainActivity.this, account_type, Toast.LENGTH_SHORT).show();
     }
 }

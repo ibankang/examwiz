@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,11 +19,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,8 +53,13 @@ public class subadmin_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subadmin_activity);
 
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                    // Get user ID
+            guid = firebaseUser.getUid();
+
+        db = FirebaseFirestore.getInstance();
         recyclerView = findViewById(R.id.recycler_view);
-//        get_subadmin_details();
+        get_subadmin_details();
 
         create_btn = findViewById(R.id.create_account_btn);
         create_btn.setOnClickListener(new View.OnClickListener() {
@@ -59,46 +69,56 @@ public class subadmin_activity extends AppCompatActivity {
                 create_subadmin();
             }
         });
+
     }
 
     private void create_subadmin() {
-        String sub_uid= Utils.randomcode(16);
-        TextInputLayout subadmin_email_txt=findViewById(R.id.create_subadmin_textinput);
+
+        TextInputLayout subadmin_email_txt = findViewById(R.id.create_subadmin_textinput);
 
         // Check if an email is entered
-        if (subadmin_email_txt.getEditText() != null) {
+        if (subadmin_email_txt.getEditText().getText().toString() != null) {
             String subadminEmail = subadmin_email_txt.getEditText().getText().toString().trim();
+            db.collection("account").whereEqualTo("email", subadmin_email_txt.getEditText().getText().toString()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful() && task.getResult().size() > 0) {
+                        for (QueryDocumentSnapshot s : task.getResult()) {
 
+                            // Update account type and other details
+                            Map<String, Object> mapdata = new HashMap<>();
+                            mapdata.put("account_type", "subadmin");
+                            mapdata.put("admin_uid", guid);
+                            mapdata.put("subaccount_time", FieldValue.serverTimestamp());
+
+                            CollectionReference accountRef = db.collection("account");
+                            accountRef.document(s.getString("guid")).update(mapdata)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(subadmin_activity.this, "Subadmin account created successfully", Toast.LENGTH_SHORT).show();
+                                                get_subadmin_details();
+                                                // Clear the email field after successful creation
+                                                subadmin_email_txt.getEditText().setText("");
+                                            } else {
+                                                Toast.makeText(subadmin_activity.this, "Failed to create subadmin account", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                        }
+                    } else {
+                        Toast.makeText(subadmin_activity.this, "Please enter subadmin email", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
             // Check if the email field is not empty
-            if (!subadminEmail.isEmpty()) {
-                // Update account type and other details
-                Map<String, Object> mapdata = new HashMap<>();
-                mapdata.put("account_type", "subadmin");
-                mapdata.put("sub_uid", sub_uid);
-                mapdata.put("subaccount_time", FieldValue.serverTimestamp());
 
-                CollectionReference accountRef = db.collection("account");
-                accountRef.document(subadminEmail).set(mapdata)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(subadmin_activity.this, "Subadmin account created successfully", Toast.LENGTH_SHORT).show();
 
-                                    // Clear the email field after successful creation
-                                    subadmin_email_txt.getEditText().setText("");
-                                } else {
-                                    Toast.makeText(subadmin_activity.this, "Failed to create subadmin account", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-            } else {
-                Toast.makeText(subadmin_activity.this, "Please enter subadmin email", Toast.LENGTH_SHORT).show();
-            }
+            // Remove the line below to prevent returning to the home screen
+            // finish();
         }
-
-        // Remove the line below to prevent returning to the home screen
-        // finish();
     }
 
 
@@ -110,7 +130,7 @@ public class subadmin_activity extends AppCompatActivity {
         ArrayList<view_model> dataholder = new ArrayList<>();
         subadmin_details_adapter wAdapter = new subadmin_details_adapter(dataholder, this);
         CollectionReference collectionReference = db.collection("account");
-        collectionReference.whereEqualTo("account_type", "subadmin").whereEqualTo("status",true).whereEqualTo("guid",guid)
+        collectionReference.whereEqualTo("admin_uid", guid)
                 //.orderBy("date_time",Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult().size()>0){
@@ -127,7 +147,7 @@ public class subadmin_activity extends AppCompatActivity {
                                     "",//7
                                     "",//8
                                     "",//9
-                                    "");//10
+                                    s.getString("guid"));//10
 
                             dataholder.add(obj);
                         }

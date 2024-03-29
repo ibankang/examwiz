@@ -1,5 +1,6 @@
 package examwiz.ibankang.com.SubAdmin;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,69 +8,174 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import examwiz.ibankang.com.Authentication.signup_activity;
 import examwiz.ibankang.com.R;
+import examwiz.ibankang.com.Utils;
+import examwiz.ibankang.com.adminUi.subadmin_activity;
 
 public class subadmin_create_exam_activity extends AppCompatActivity {
+
+    AutoCompleteTextView autoCompleteTextView,autoCompletetxt_category;
+
+    EditText exam_title, exam_date, exam_instruction, exam_start_time, exam_end_time;
+    String selected_live_time = "5 mints", selected_exam_category = "MST-1", guid= null;
+    private FirebaseFirestore db;
+    Button create_exam_btn;
+    ProgressBar progressBar;
+    FirebaseAuth firebaseAuth;
     private static final int REQUEST_CODE_CSV = 123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subadmin_create_exam_activity);
 
-        ImageView upload_img = findViewById(R.id.upload_img);
-        upload_img.setOnClickListener(v -> {
-            // Open file picker to select CSV file
-            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            intent.setType("text/csv"); // Set the MIME type for CSV files
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            startActivityForResult(intent, REQUEST_CODE_CSV);
+        db = FirebaseFirestore.getInstance();
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        // Get user ID
+        guid = firebaseUser.getUid();
+
+        exam_title = findViewById(R.id.exam_title);
+        exam_date = findViewById(R.id.exam_date);
+        exam_start_time = findViewById(R.id.exam_start_time);
+        exam_end_time = findViewById(R.id.exam_end_time);
+        exam_instruction = findViewById(R.id.exam_instruction_txt);
+
+        progressBar = findViewById(R.id.progress_bar);
+        create_exam_btn = findViewById(R.id.create_exam_btn);
+
+        //exam live time
+        autoCompleteTextView = findViewById(R.id.exam_live_time_dropdown);
+
+        // Data to be inserted into the dropdown
+        String[] live_time = {"5 mints", "10 mints", "15 mints", "20 mints"};
+
+        // Creating adapter to set data to the AutoCompleteTextView
+        ArrayAdapter<String> adapter_live_time = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, live_time);
+
+        // Setting the adapter to the AutoCompleteTextView
+        autoCompleteTextView.setAdapter(adapter_live_time);
+
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selected_live_time = (String) parent.getItemAtPosition(position);
+                // Call method to save selected department to Firebase
+            }
         });
+
+        //exam category
+        autoCompletetxt_category = findViewById(R.id.exam_category_dropdown);
+
+        // Data to be inserted into the dropdown
+        String[] exam_category = {"MST-1", "MST-2", "Final Exam"};
+
+        // Creating adapter to set data to the AutoCompleteTextView
+        ArrayAdapter<String> adapter_exam_category = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, exam_category);
+
+        // Setting the adapter to the AutoCompleteTextView
+        autoCompletetxt_category.setAdapter(adapter_exam_category);
+
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selected_exam_category = (String) parent.getItemAtPosition(position);
+                // Call method to save selected department to Firebase
+            }
+        });
+
+
+        create_exam_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                create_exam();
+                changeInProgress(true);
+
+            }
+        });
+
+
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public boolean create_exam() {
 
-        if (requestCode == REQUEST_CODE_CSV && resultCode == RESULT_OK && data != null) {
-            // Get selected CSV file URI
-            Uri csvUri = data.getData();
-
-            // Upload CSV file to Firebase Storage
-            uploadCsvFile(csvUri);
+        String exam_uid= Utils.randomcode(16);
+        if (exam_title.getText().toString().length()<1) {
+            exam_title.setError("Field is required");
+            return false;
         }
+        if (exam_date.getText().toString().length()<1) {
+            exam_date.setError("Field is required");
+            return false;
+        }
+        if (exam_start_time.getText().toString().length()<1) {
+            exam_start_time.setError("Field is required");
+            return false;
+        }
+        if (exam_end_time.getText().toString().length()<1) {
+            exam_end_time.setError("Field is required");
+            return false;
+        }
+        if (exam_instruction.getText().toString().length()<1) {
+            exam_instruction.setError("Field is required");
+            return false;
+        }
+
+        else {
+            Map<String, Object> mapdata = new HashMap<>();
+            mapdata.put("exam_uid", exam_uid);
+            mapdata.put("status", true);
+            mapdata.put("exam_title,", exam_title.getText().toString());
+            mapdata.put("exam_start", exam_start_time.getText().toString());
+            mapdata.put("exam_date", exam_date.getText().toString());
+            mapdata.put("exam_end", exam_end_time.getText().toString());
+            mapdata.put("exam_category", selected_exam_category);
+            mapdata.put("exam_instructions", exam_instruction.getText().toString());
+            mapdata.put("seating_plan_live", selected_live_time);
+            mapdata.put("date_time", FieldValue.serverTimestamp());
+
+            FirebaseFirestore.getInstance().collection("exam").document(exam_uid).set(mapdata).addOnCompleteListener(task -> {
+                Toast.makeText(subadmin_create_exam_activity.this, "Successfully created an exam", Toast.LENGTH_SHORT).show();
+                finish();
+            });
+        }
+        return false;
     }
-
-    private void uploadCsvFile(Uri csvUri) {
-        if (csvUri != null) {
-            ProgressBar progressDialog = new ProgressBar(this);
-            progressDialog.setIndeterminate(true);
-            progressDialog.setVisibility(ProgressBar.VISIBLE);
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference();
-
-            // Create a unique filename for the image
-            String file_name = "schedule_file" + System.currentTimeMillis() + ".csv";
-
-            StorageReference csvRef = storageRef.child("schedule_file").child(file_name);
-
-            csvRef.putFile(csvUri)
-                    .addOnSuccessListener(taskSnapshot -> {
-                        // CSV file upload successful
-                        Toast.makeText(subadmin_create_exam_activity.this, "CSV file uploaded successfully", Toast.LENGTH_SHORT).show();
-                    })
-                    .addOnFailureListener(exception -> {
-                        // CSV file upload failed
-                        Log.e("Firebase", "Failed to upload CSV file", exception);
-                        Toast.makeText(subadmin_create_exam_activity.this, "Failed to upload CSV file", Toast.LENGTH_SHORT).show();
-                    });
-            progressDialog.setVisibility(ProgressBar.INVISIBLE);
+    
+    void changeInProgress(boolean inProgress) {
+        if (inProgress) {
+            progressBar.setVisibility(View.VISIBLE);
+            create_exam_btn.setVisibility(View.GONE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+            create_exam_btn.setVisibility(View.VISIBLE);
         }
     }
 }

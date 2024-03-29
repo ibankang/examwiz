@@ -76,10 +76,9 @@
                 android:layout_gravity="center"
                 android:orientation="horizontal"
                 android:visibility="gone"
-                android:background="@drawable/border_bg"
                 android:layout_marginRight="5dp">
 
-                <Spinner
+                <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/year_spinner"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

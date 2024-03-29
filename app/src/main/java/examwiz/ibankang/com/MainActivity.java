@@ -2,6 +2,7 @@ package examwiz.ibankang.com;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     String account_type = "user", username, email;
     DrawerLayout drawerLayout;
     BottomNavigationView bottomNavigationView;
+    AppCompatSpinner spinner;
+    String selectedYear = "1st Year";
+    boolean userSelect = false; // Flag to track user selection
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,20 +60,40 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Get reference to the spinner
-        Spinner spinner = findViewById(R.id.year_spinner);
+        spinner = findViewById(R.id.year_spinner);
+        spinner.setBackgroundDrawable(getResources().getDrawable(R.drawable.baseline_search_24));
 
         // Define an array of options
-        String[] years = {"1st Year", "2nd Year", "3rd Year", "4th Year"};
 
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, years);
-
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Apply the adapter to the spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.spinner_items, R.layout.custom_spinner_item);
+        adapter.setDropDownViewResource(R.layout.custom_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Get the selected item from the spinner's adapter
+                // Check if the selection is user-initiated
+                if (userSelect) {
+                    // Get the selected item from the spinner's adapter
+                    String selectedItem = (String) parent.getItemAtPosition(position);
+                    selectedYear = selectedItem;
+
+                    // Do something with the selected item
+                    // For example, you can display it in a Toast
+                    Toast.makeText(getApplicationContext(), "Selected: " + selectedItem, Toast.LENGTH_SHORT).show();
+                } else {
+                    // If the selection is not user-initiated, set the flag to true
+                    userSelect = true;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Handle the case where no item is selected (optional)
+            }
+        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

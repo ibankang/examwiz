@@ -130,4 +130,13 @@
     <color name="border_color">#FF000000</color>
     <color name="border_bg">#FFD2D2D2</color>
     <color name="banner_bg">#FFD2D2D2</color>
+
+    // colors for spinner
+    <color name="my_spinner_item_background_color">#E0E0E0</color>
+    <color name="my_spinner_dropdown_item_background_color">#E0E0E0</color>
+    <color name="my_spinner_dropdown_item_pressed_background_color">#CCCCCC</color>
+
+    <color name="my_spinner_background_color">#FFFFFF</color>
+    <color name="my_spinner_pressed_background_color">#CCCCCC</color>
+    <color name="my_spinner_focused_background_color">#E0E0E0</color>
 </resources>

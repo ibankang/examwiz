@@ -61,10 +61,11 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="170dp"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:layout_margin="10dp"
                 android:backgroundTint="#E8EDE8"
                 android:elevation="30dp"
+                android:layout_weight="1"
                 android:id="@+id/yr_1st_box"
                 android:outlineAmbientShadowColor="@color/black"
                 android:outlineSpotShadowColor="@color/black"
@@ -94,10 +95,11 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="170dp"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="20dp"
                 android:elevation="30dp"
+                android:layout_weight="1"
                 android:id="@+id/yr_2nd_box"
                 android:backgroundTint="#E8EDE8"
                 android:outlineAmbientShadowColor="@color/black"
@@ -135,10 +137,11 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="170dp"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="20dp"
                 android:elevation="30dp"
+                android:layout_weight="1"
                 android:id="@+id/yr_3rd_box"
                 android:backgroundTint="#E8EDE8"
                 android:outlineAmbientShadowColor="@color/black"
@@ -168,10 +171,11 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="170dp"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 android:layout_margin="10dp"
                 android:backgroundTint="#E8EDE8"
                 android:elevation="30dp"
+                android:layout_weight="1"
                 android:id="@+id/yr_4th_box"
                 android:outlineAmbientShadowColor="@color/black"
                 android:outlineSpotShadowColor="@color/black"

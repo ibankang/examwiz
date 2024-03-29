@@ -24,7 +24,7 @@ public class subadmin_year_exam_activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(subadmin_year_exam_activity.this, subadmin_create_exam_activity.class));
-
+// comment
             }
         });
     }

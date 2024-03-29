@@ -16,12 +16,13 @@ public class subadmin_exam_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subadmin_exam_activity);
-
-        ((CardView)findViewById(R.id.yr_1st_box)).setOnClickListener(new View.OnClickListener() {
+        CardView yr_1st_box=findViewById(R.id.yr_1st_box);
+        yr_1st_box.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(subadmin_exam_activity.this, subadmin_year_exam_activity.class));
-
+                Intent intent = new Intent(subadmin_exam_activity.this, subadmin_year_exam_activity.class);
+                intent.putExtra("year_uid","yr_1st_box");
+                startActivity(intent);
             }
         });
     }

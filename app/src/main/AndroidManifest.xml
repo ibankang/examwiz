@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExamWiz"
         tools:targetApi="31">
+        <activity
+            android:name=".SubAdmin.subadmin_upload_exam_schedule_activity"
+            android:exported="false" />
         <activity
             android:name=".SubAdmin.subadmin_create_exam_activity"
             android:exported="false" />
@@ -28,9 +32,7 @@
         <activity
             android:name=".adminUi.subadmin_activity"
             android:exported="false" />
-        <activity
-            android:name=".SubAdmin.SubAdminMainActivity"
-            android:exported="false" />
+
         <activity
             android:name=".profile_activity"
             android:exported="false" />

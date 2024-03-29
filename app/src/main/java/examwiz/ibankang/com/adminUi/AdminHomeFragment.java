@@ -53,15 +53,11 @@ public class AdminHomeFragment extends Fragment {
         ArrayList<SlideModel> slideModels = new ArrayList<>();
 
         slideModels.add(new SlideModel(R.drawable.wallpaper1, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.wallpaper2, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.wallpaper3, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.wallpaper4, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.wallpaper5, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.wallpaper6, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.wallpaper7, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.wallpaper8, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.wallpaper9, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.wallpaper10, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper1, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper1, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper1, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper1, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.wallpaper1, ScaleTypes.FIT));
 
         imageSlider.setImageList(slideModels, ScaleTypes.FIT);
 

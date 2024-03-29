@@ -45,16 +45,20 @@ public class subadmin_create_exam_activity extends AppCompatActivity {
     AutoCompleteTextView autoCompleteTextView,autoCompletetxt_category;
 
     EditText exam_title, exam_date, exam_instruction, exam_start_time, exam_end_time;
-    String selected_live_time = "5 mints", selected_exam_category = "MST-1", guid= null;
+    String selected_live_time = "null", selected_exam_category = "MST-1", guid= null;
     private FirebaseFirestore db;
     Button create_exam_btn;
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
+
+    String year_uid = null;
     private static final int REQUEST_CODE_CSV = 123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subadmin_create_exam_activity);
+
+        year_uid = getIntent().getStringExtra("year_uid");
 
         db = FirebaseFirestore.getInstance();
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -102,7 +106,7 @@ public class subadmin_create_exam_activity extends AppCompatActivity {
         // Setting the adapter to the AutoCompleteTextView
         autoCompletetxt_category.setAdapter(adapter_exam_category);
 
-        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        autoCompletetxt_category.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selected_exam_category = (String) parent.getItemAtPosition(position);
@@ -152,7 +156,8 @@ public class subadmin_create_exam_activity extends AppCompatActivity {
             Map<String, Object> mapdata = new HashMap<>();
             mapdata.put("exam_uid", exam_uid);
             mapdata.put("status", true);
-            mapdata.put("exam_title,", exam_title.getText().toString());
+            mapdata.put("year_uid", year_uid);
+            mapdata.put("exam_title", exam_title.getText().toString());
             mapdata.put("exam_start", exam_start_time.getText().toString());
             mapdata.put("exam_date", exam_date.getText().toString());
             mapdata.put("exam_end", exam_end_time.getText().toString());

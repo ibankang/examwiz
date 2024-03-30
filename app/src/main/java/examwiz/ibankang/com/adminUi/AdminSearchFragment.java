@@ -7,60 +7,44 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import examwiz.ibankang.com.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AdminSearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AdminSearchFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public AdminSearchFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AdminSearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AdminSearchFragment newInstance(String param1, String param2) {
-        AdminSearchFragment fragment = new AdminSearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin_search, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_admin_search, container, false);
+
+        EditText search_edit_text;
+        ImageView search_btn;
+
+        search_edit_text = view.findViewById(R.id.search_edit_text);
+        search_btn = view.findViewById(R.id.search_btn);
+
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get the search query
+                String search_query = search_edit_text.getText().toString().trim();
+                if (search_query.isEmpty()) {
+                    Toast.makeText(getContext(), "Please enter a search query", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    // Search for the query
+                    Toast.makeText(getContext(), "Searching for " + search_query, Toast.LENGTH_SHORT).show();
+                }
+
+                // Search for the query
+                // search(search_query);
+            }
+        });
+
+        return view;
     }
 }

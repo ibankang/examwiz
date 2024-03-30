@@ -31,10 +31,14 @@ public class subadmin_year_exam_activity extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     FirebaseUser firebaseUser;
     private FirebaseFirestore db;
-    TextView textView;
+    TextView textView, year_txt;
+    ImageView back_btn;
     String guid = null, exam_uid = null;
 
     String year_uid = null;
+    String year2_uid = null;
+    String year3_uid = null;
+    String year4_uid = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,13 +52,31 @@ public class subadmin_year_exam_activity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         recyclerView = findViewById(R.id.recycler_view);
+        year_txt = findViewById(R.id.year_txt);
+        year_txt.setText(getIntent().getStringExtra("year_txt"));
+        back_btn = findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         ((ImageView)findViewById(R.id.add_img)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(subadmin_year_exam_activity.this, subadmin_create_exam_activity.class);
-                intent.putExtra("year_uid","yr_1st_box");
+                if (year_uid.equals("yr_1st_box")){
+                    intent.putExtra("year_uid","yr_1st_box");
+                }else if (year_uid.equals("yr_2nd_box")){
+                    intent.putExtra("year_uid","yr_2nd_box");
+                } else if (year_uid.equals("yr_3rd_box")){
+                    intent.putExtra("year_uid","yr_3rd_box");
+                } else if (year_uid.equals("yr_4th_box")){
+                    intent.putExtra("year_uid","yr_4th_box");
+                }
+//                intent.putExtra("year_uid","yr_1st_box");
                 startActivity(intent);
             }
         });

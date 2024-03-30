@@ -50,6 +50,7 @@ public class subadmin_create_exam_activity extends AppCompatActivity {
     Button create_exam_btn;
     ProgressBar progressBar;
     FirebaseAuth firebaseAuth;
+    ImageView back_btn;
 
     String year_uid = null;
     private static final int REQUEST_CODE_CSV = 123;
@@ -59,6 +60,13 @@ public class subadmin_create_exam_activity extends AppCompatActivity {
         setContentView(R.layout.subadmin_create_exam_activity);
 
         year_uid = getIntent().getStringExtra("year_uid");
+        back_btn = findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         db = FirebaseFirestore.getInstance();
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

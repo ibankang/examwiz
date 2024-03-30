@@ -47,6 +47,8 @@ public class subadmin_exam_schedule_details_adapter extends RecyclerView.Adapter
     public void onBindViewHolder(@NonNull viewholder holder, @SuppressLint("RecyclerView") int position) {
         final view_model temp = dataholder.get(position);
         holder.exam_room_no_txt.setText(temp.getText1());
+        holder.exam_row_no_txt.setText(temp.getText2());
+        holder.exam_seat_no_txt.setText(temp.getText3());
         CollectionReference collectionReference = FirebaseFirestore.getInstance().collection("exam");
         collectionReference
                 .whereEqualTo("exam_uid",temp.getText10()).limit(1)
@@ -57,6 +59,9 @@ public class subadmin_exam_schedule_details_adapter extends RecyclerView.Adapter
 
 
                                     holder.exam_title_txt.setText(s.getString("exam_title"));//1
+                                    holder.exam_category_txt.setText(s.getString("exam_category"));
+                                    holder.exam_start_txt.setText(s.getString("exam_start"));
+                                    holder.exam_end_txt.setText(s.getString("exam_end"));
 //                                    s.getString("exam_category"),//2
 //                                    s.getString("exam_date"),//3
 //                                    s.getString("exam_start"),//4
@@ -138,22 +143,20 @@ public class subadmin_exam_schedule_details_adapter extends RecyclerView.Adapter
     public class viewholder extends RecyclerView.ViewHolder {
 
        LinearLayout add_new_layout;
-        TextView  exam_room_no_txt, exam_title_txt, exam_category_txt, exam_start_txt, exam_end_txt;
-        ImageView exam_delete_btn_img;
+        TextView  exam_room_no_txt, exam_title_txt, exam_category_txt, exam_start_txt, exam_end_txt, exam_row_no_txt, exam_seat_no_txt;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
 
             add_new_layout = itemView.findViewById(R.id.add_new_layout);
-           // exam_date_txt = itemView.findViewById(R.id.exam_date_txt);
             exam_title_txt = itemView.findViewById(R.id.exam_title_txt);
-//             exam_day_txt = itemView.findViewById(R.id.exam_day_txt);
+            exam_category_txt = itemView.findViewById(R.id.exam_category_txt);
+            exam_start_txt = itemView.findViewById(R.id.exam_start_txt);
+            exam_end_txt = itemView.findViewById(R.id.exam_end_txt);
+
             exam_room_no_txt = itemView.findViewById(R.id.exam_room_no_txt);
-//            exam_category_txt = itemView.findViewById(R.id.exam_category_txt);
-//            exam_live_txt = itemView.findViewById(R.id.exam_live_time_txt);
-//            exam_start_txt = itemView.findViewById(R.id.exam_start_txt);
-//            exam_end_txt = itemView.findViewById(R.id.exam_end_txt);
-//            exam_delete_btn_img = itemView.findViewById(R.id._exam_delete_btn_img);
+            exam_row_no_txt = itemView.findViewById(R.id.exam_row_no_txt);
+            exam_seat_no_txt = itemView.findViewById(R.id.exam_seat_no_txt);
         }
     }
 }

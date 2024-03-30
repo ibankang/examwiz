@@ -147,14 +147,12 @@ public class AdminHomeFragment extends Fragment {
 
                             view_model obj = new view_model(
                                     s.getString("roomno"),//1
-//                                    s.getString("exam_category"),//2
-//                                    s.getString("exam_date"),//3
+                                    s.getString("rowno"),//2
+                                    s.getString("seatno"),//3
 //                                    s.getString("exam_start"),//4
 //                                    //String.valueOf(dateFormat.format(s.getTimestamp("dob").toDate())),//4
 //                                    s.getString("exam_end"),//5
 //                                    s.getString("seating_plan_live"),//6
-                                    "",//7
-                                    "",//7
                                     "",//7
                                     "",//7
                                     "",//7

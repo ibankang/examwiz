@@ -40,6 +40,7 @@ import examwiz.ibankang.com.view_model;
 
 public class AdminHomeFragment extends Fragment {
 
+    // Declare variables
     String account_type = "user";
     RecyclerView recyclerView;
     SharedPreferences sharedpreferences;
@@ -69,18 +70,15 @@ public class AdminHomeFragment extends Fragment {
             rollno = getArguments().getString("rollno");
         }
 
-        get_exam_details();
+        get_exam_details(); // Retrieve exam details
 
-
-        //slider
+        // Slider
         ImageSlider imageSlider = view.findViewById(R.id.image_slider);
         ArrayList<SlideModel> slideModels = new ArrayList<>();
-
         slideModels.add(new SlideModel(R.drawable.slider2, ScaleTypes.FIT));
         slideModels.add(new SlideModel(R.drawable.slider3, ScaleTypes.FIT));
         slideModels.add(new SlideModel(R.drawable.slider4, ScaleTypes.FIT));
         slideModels.add(new SlideModel(R.drawable.slider5, ScaleTypes.FIT));
-
         imageSlider.setImageList(slideModels, ScaleTypes.FIT);
 
         return view;
@@ -89,11 +87,11 @@ public class AdminHomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        get_user_rollno();
+        get_user_rollno(); // Retrieve user's roll number
     }
 
-    void get_exam_details(){
-
+    // Method to retrieve exam details
+    void get_exam_details() {
         if (account_type.equals("admin") || account_type.equals("subadmin")) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault());
             LinearLayoutManager mlinearLayoutManager = new LinearLayoutManager(getContext());
@@ -102,7 +100,6 @@ public class AdminHomeFragment extends Fragment {
             subadmin_exam_details_adapter wAdapter = new subadmin_exam_details_adapter(dataholder, getContext());
             CollectionReference collectionReference = db.collection("exam");
             collectionReference
-                    //.orderBy("date_time",Query.Direction.DESCENDING)
                     .get().addOnCompleteListener(task -> {
                         if (task.isSuccessful() && task.getResult().size() > 0) {
                             for (QueryDocumentSnapshot s : task.getResult()) {
@@ -124,13 +121,13 @@ public class AdminHomeFragment extends Fragment {
                             }
                             recyclerView.setAdapter(wAdapter);
                         } else {
-
+                            // Handle no exam found
                         }
                     });
         }
-
     }
 
+    // Method to retrieve exam details for a specific user
     private void get_exam_details_user() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault());
         LinearLayoutManager mlinearLayoutManager = new LinearLayoutManager(getContext());
@@ -149,10 +146,6 @@ public class AdminHomeFragment extends Fragment {
                                     s.getString("roomno"),//1
                                     s.getString("rowno"),//2
                                     s.getString("seatno"),//3
-//                                    s.getString("exam_start"),//4
-//                                    //String.valueOf(dateFormat.format(s.getTimestamp("dob").toDate())),//4
-//                                    s.getString("exam_end"),//5
-//                                    s.getString("seating_plan_live"),//6
                                     "",//7
                                     "",//7
                                     "",//7
@@ -165,24 +158,21 @@ public class AdminHomeFragment extends Fragment {
                         }
                         recyclerView.setAdapter(wAdapter);
                     } else {
-
+                        // Handle no exam found for the user
                     }
                 });
 
     }
 
+    // Method to retrieve user's roll number
     private void get_user_rollno() {
-
-
         // Get Firebase user
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         if (firebaseUser != null) {
             // Get user ID
             String userId = firebaseUser.getUid();
-
             // Get Firestore instance
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-
             // Get document reference
             DocumentReference docRef = db.collection("account").document(userId);
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -193,10 +183,9 @@ public class AdminHomeFragment extends Fragment {
                         if (document.exists()) {
                             // Retrieve user data
                             rollno = document.getString("roll_no");
-                             String name = document.getString("name");
+                            String name = document.getString("name");
                             Toast.makeText(getContext(), name+"_"+rollno, Toast.LENGTH_SHORT).show();
-
-                            get_exam_details_user();
+                            get_exam_details_user(); // Retrieve exam details for the user
                         }
                     } else {
                         Log.d("MainActivity", "Document retrieval failed:", task.getException());
@@ -205,5 +194,4 @@ public class AdminHomeFragment extends Fragment {
             });
         }
     }
-
 }

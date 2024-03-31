@@ -62,17 +62,6 @@ public class subadmin_exam_schedule_details_adapter extends RecyclerView.Adapter
                                     holder.exam_category_txt.setText(s.getString("exam_category"));
                                     holder.exam_start_txt.setText(s.getString("exam_start"));
                                     holder.exam_end_txt.setText(s.getString("exam_end"));
-//                                    s.getString("exam_category"),//2
-//                                    s.getString("exam_date"),//3
-//                                    s.getString("exam_start"),//4
-//                                    //String.valueOf(dateFormat.format(s.getTimestamp("dob").toDate())),//4
-//                                    s.getString("exam_end"),//5
-//                                    s.getString("seating_plan_live"),//6
-//                                    "",//7
-//                                    "",//8
-//                                    "",//9
-//                                    s.getString("exam_uid"));//10
-
 
                         }
 
@@ -81,58 +70,6 @@ public class subadmin_exam_schedule_details_adapter extends RecyclerView.Adapter
 
                     }
                 });
-//        holder.exam_category_txt.setText(temp.getText2());
-//        //3
-//        holder.exam_start_txt.setText(temp.getText4());
-//        holder.exam_end_txt.setText(temp.getText5());
-//        holder.exam_live_txt.setText(temp.getText6());
-//        holder.subadmin_create_date.setText(temp.getText4());
-
-//        holder.add_new_layout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, subadmin_upload_exam_schedule_activity.class);
-//                intent.putExtra("exam_uid", temp.getText10());
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//
-//                context.startActivity(intent);
-//
-//            }
-//        });
-
-//        holder.exam_delete_btn_img.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                 FirebaseFirestore.getInstance().collection("schedule").whereEqualTo("exam_uid", temp.getText10()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                     @Override
-//                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//
-//                         if (task.isSuccessful() && task.getResult().size()>0) {
-//                             for (QueryDocumentSnapshot s:task.getResult()) {
-//                                 CollectionReference accountRef = FirebaseFirestore.getInstance().collection("schedule");
-//                                 accountRef.document(s.getId()).delete();
-//
-//                             }
-//                             CollectionReference accountRef = FirebaseFirestore.getInstance().collection("exam");
-//                             accountRef.document(temp.getText10()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                 @Override
-//                                 public void onComplete(@NonNull Task<Void> task) {
-//                                     Toast.makeText(context, "Exam Delete successfully", Toast.LENGTH_SHORT).show();
-//                                     new Handler().postDelayed(new Runnable() {
-//                                         @Override
-//                                         public void run() {
-//                                             dataholder.remove(position);
-//                                             notifyItemRemoved(position);
-//                                         }
-//                                     }, 1000);
-//                                 }
-//                             });
-//                         }
-//                     }
-//                 });
-//
-//            }
-//        });
     }
 
     @Override

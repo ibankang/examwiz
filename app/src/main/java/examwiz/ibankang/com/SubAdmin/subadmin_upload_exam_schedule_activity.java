@@ -29,15 +29,8 @@ public class subadmin_upload_exam_schedule_activity extends AppCompatActivity {
     private static final int REQUEST_PERMISSION_CODE = 123;
     private static final String TAG = "UploadCSVActivity";
 
-//    RecyclerView recyclerView;
-//    SharedPreferences sharedpreferences;
-//    FirebaseUser firebaseUser;
     private FirebaseFirestore db;
-//    TextView textView;
-//    private static final int GALLERY_REQUEST_CODE = 1;
     public String guid = null, exam_uid = null;
-//    private int columnindex = 0;
-//    private static final int REQUEST_CODE_CSV = 123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,27 +42,7 @@ public class subadmin_upload_exam_schedule_activity extends AppCompatActivity {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         // Get user ID
         guid = firebaseUser.getUid();
-//        // Check if permission is granted
-//        if (checkPermission()) {
-//            // Permission is already granted
-//            openFilePicker();
-//        } else {
-//            // Permission is not granted, request permission
-//            requestPermission();
-//        }
-
-        // Call file picker when activity starts
         openFilePicker();
-
-
-//        ((ImageView)findViewById(R.id.upload_schedule_btn_img)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //new FetchCSVTask(textView, columnindex).execute(exam_uid);
-//                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//                startActivityForResult(intent, FILE_SELECT_CODE);
-//            }
-//        });
     }
 
     private void openFilePicker() {
@@ -117,13 +90,6 @@ public class subadmin_upload_exam_schedule_activity extends AppCompatActivity {
                     // Parse CSV data and save to Firebase Firestore
                      saveToFirestore(parseCSV(columns, headerLine));
 
-//                    Map<String, Object> mapdata = new HashMap<>();
-//                    mapdata.put("exam_uid",exam_uid);
-//                    mapdata.put("status", true);
-//                    mapdata.put(String.valueOf(columns), String.valueOf(headerLine));
-//                    mapdata.put("date_time", FieldValue.serverTimestamp());
-//                    FirebaseFirestore.getInstance().collection("exam").document(exam_uid).set(mapdata);
-
                 }
             }
             reader.close();
@@ -159,49 +125,4 @@ public class subadmin_upload_exam_schedule_activity extends AppCompatActivity {
                     Toast.makeText(subadmin_upload_exam_schedule_activity.this, "Failed to upload CSV data", Toast.LENGTH_SHORT).show();
                 });
     }
-
-//    private boolean checkPermission() {
-//        return ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-//                == PackageManager.PERMISSION_GRANTED;
-//    }
-//
-//    private void requestPermission() {
-//        ActivityCompat.requestPermissions(this,
-//                new String[]{Manifest.permission.},
-//                REQUEST_PERMISSION_CODE);
-//    }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if (requestCode == REQUEST_PERMISSION_CODE) {
-//            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                // Permission granted, open file picker
-//                openFilePicker();
-//            } else {
-//                // Permission denied, show a message or handle it accordingly
-//                Toast.makeText(this, "Permission denied. Cannot proceed.", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-//@Override
-//protected void onResume() {
-//    super.onResume();
-//    Dexter.withContext(this).withPermissions(
-//            Manifest.permission.INTERNET,
-//            Manifest.permission.READ_EXTERNAL_STORAGE
-//
-//    ).withListener(new MultiplePermissionsListener()
-//    {
-//        @Override
-//        public void onPermissionsChecked(MultiplePermissionsReport report) {
-//
-//
-//        }
-//        public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken)
-//        {
-//            permissionToken.continuePermissionRequest();
-//        }
-//    }).check();
-//}
 }

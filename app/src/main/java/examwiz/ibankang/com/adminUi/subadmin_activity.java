@@ -48,32 +48,36 @@ public class subadmin_activity extends AppCompatActivity {
     private FirebaseFirestore db;
     String guid = null, subadmin;
     MaterialButton create_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.subadmin_activity);
 
+        // Initialize Firebase components
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                    // Get user ID
-            guid = firebaseUser.getUid();
-
+        // Get user ID
+        guid = firebaseUser.getUid();
         db = FirebaseFirestore.getInstance();
+
+        // Initialize views
         recyclerView = findViewById(R.id.recycler_view);
+        create_btn = findViewById(R.id.create_account_btn);
+
+        // Fetch subadmin details
         get_subadmin_details();
 
-        create_btn = findViewById(R.id.create_account_btn);
+        // Set click listener for create button
         create_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 create_subadmin();
             }
         });
-
     }
 
+    // Method to create subadmin account
     private void create_subadmin() {
-
         TextInputLayout subadmin_email_txt = findViewById(R.id.create_subadmin_textinput);
 
         // Check if an email is entered
@@ -113,17 +117,11 @@ public class subadmin_activity extends AppCompatActivity {
 
                 }
             });
-            // Check if the email field is not empty
-
-
-            // Remove the line below to prevent returning to the home screen
-            // finish();
         }
     }
 
-
-    void get_subadmin_details(){
-
+    // Method to fetch subadmin details
+    void get_subadmin_details() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault());
         LinearLayoutManager mlinearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mlinearLayoutManager);
@@ -133,15 +131,14 @@ public class subadmin_activity extends AppCompatActivity {
         collectionReference.whereEqualTo("admin_uid", guid)
                 //.orderBy("date_time",Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult().size()>0){
-                        for (QueryDocumentSnapshot s : task.getResult()){
+                    if (task.isSuccessful() && task.getResult().size() > 0) {
+                        for (QueryDocumentSnapshot s : task.getResult()) {
 
                             view_model obj = new view_model(
                                     s.getString("photo"),//1
                                     s.getString("name"),//2
                                     s.getString("email"),//3
-                                    "",
-                                    //String.valueOf(dateFormat.format(s.getTimestamp("dob").toDate())),//4
+                                    "",//4
                                     "",//5
                                     "",//6
                                     "",//7
@@ -152,9 +149,8 @@ public class subadmin_activity extends AppCompatActivity {
                             dataholder.add(obj);
                         }
                         recyclerView.setAdapter(wAdapter);
-                    }else
-                    {
-
+                    } else {
+                        // Handle no subadmin found
                     }
                 });
     }

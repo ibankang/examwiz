@@ -45,14 +45,6 @@ public class profile_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_activity);
 
-//        ImageView edit_img = findViewById(R.id.edit_prifile_img);
-//        edit_img.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-
         get_profile_data();
 
         // Remove this click listener setup

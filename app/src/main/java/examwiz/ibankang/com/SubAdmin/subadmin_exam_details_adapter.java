@@ -57,7 +57,6 @@ public class subadmin_exam_details_adapter extends RecyclerView.Adapter<subadmin
         holder.exam_start_txt.setText(temp.getText4());
         holder.exam_end_txt.setText(temp.getText5());
         holder.exam_live_txt.setText(temp.getText6());
-//        holder.subadmin_create_date.setText(temp.getText4());
 
         holder.add_new_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +121,6 @@ public class subadmin_exam_details_adapter extends RecyclerView.Adapter<subadmin
 
             add_new_layout = itemView.findViewById(R.id.add_new_layout);
             exam_date_txt = itemView.findViewById(R.id.exam_date_txt);
-//             exam_day_txt = itemView.findViewById(R.id.exam_day_txt);
             exam_title_txt = itemView.findViewById(R.id.exam_title_txt);
             exam_category_txt = itemView.findViewById(R.id.exam_category_txt);
             exam_live_txt = itemView.findViewById(R.id.exam_live_time_txt);

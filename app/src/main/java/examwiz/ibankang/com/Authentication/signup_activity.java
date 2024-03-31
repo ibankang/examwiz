@@ -73,9 +73,6 @@ public class signup_activity extends AppCompatActivity {
         dept_name_textinput = findViewById(R.id.dept_name_textinput);
         designation_textinput = findViewById(R.id.designation_textinput);
         passout_textinput = findViewById(R.id.passout_textinput);
-//        city_name_textinput = findViewById(R.id.city_name_textinput);
-//        state_textinput = findViewById(R.id.state_textinput);
-//        country_textinput = findViewById(R.id.country_textinput);
         AutoCompleteTextView autoCompleteTextView = findViewById(R.id.deptDropDown);
 
 
@@ -208,18 +205,7 @@ public class signup_activity extends AppCompatActivity {
             passout_textinput.setError("Field is required");
             return false;
         }
-//        if (city_name_textinput.getEditText().getText().toString().length()<1) {
-//            city_name_textinput.setError("Field is required");
-//            return false;
-//        }
-//        if (state_textinput.getEditText().getText().toString().length()<1) {
-//            state_textinput.setError("Field is required");
-//            return false;
-//        }
-//        if (country_textinput.getEditText().getText().toString().length()<1) {
-//            country_textinput.setError("Field is required");
-//            return false;
-//        }
+
         else {
             Map<String, Object> mapdata = new HashMap<>();
             mapdata.put("guid", guid);
@@ -238,9 +224,6 @@ public class signup_activity extends AppCompatActivity {
             mapdata.put("university", uni_name_textinput.getEditText().getText().toString());
             mapdata.put("department", selectedDepartment);
             mapdata.put("passout_year", passout_textinput.getEditText().getText().toString());
-//            mapdata.put("city", city_name_textinput.getEditText().getText().toString());
-//            mapdata.put("state", state_textinput.getEditText().getText().toString());
-//            mapdata.put("country", country_textinput.getEditText().getText().toString());
             mapdata.put("email", emailEditText.getEditText().getText().toString());
             mapdata.put("date_time", FieldValue.serverTimestamp());
 
